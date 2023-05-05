@@ -121,7 +121,24 @@ class User {
     // ---------------------------------------------------- //
     //                         UPDATE                       //
     // ---------------------------------------------------- //
-    public static function updateUser() {
+    public static function updateUser($id, $fields) {
+        $query = 'UPDATE users SET ';
+
+        $columnsAndPlaceholders = array_map(
+            fn($column) => "$column = ?",
+            array_keys($fields)
+        );
+
+        $query .= implode(', ', $columnsAndPlaceholders);
+
+        $query .= ' WHERE id = ?';
+
+        $values = array_values($fields);
+        $values[] = $id;
+
+        $bdd = MysqlDatabaseConnectionService::get()->prepare($query);
+
+        $bdd->execute($values);
 
     }
 

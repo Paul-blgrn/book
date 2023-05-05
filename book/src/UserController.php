@@ -49,9 +49,33 @@ class UserController {
     //                         UPDATE                       //
     // ---------------------------------------------------- //
     public function updateUser() {
-        if(empty($_POST) || !isset($_GET['id'])) {
+        if(empty($_POST) || !isset($_POST['id'])) {
             throw new MyException('Accèss forbidden', 403);
         }
+        $authorizedFields = [
+            'name',
+            'email',
+            'password',
+        ];
+        $fields = [];
+
+        $fields = [];
+
+        foreach($_POST AS $key => $value) {
+            if(in_array($key, $authorizedFields)) {
+                $fields[$key] = $key === 'password'
+                    ? password_hash($value, PASSWORD_DEFAULT)
+                    : $value;
+            }
+        }
+        
+        if (!empty($fields)) {
+            return User::updateUser(
+                $_POST['id'],
+                $fields
+            );
+        }
+
         throw new MyException("Parameter not found, try another one", 404);
     }
 
@@ -63,7 +87,7 @@ class UserController {
             throw new MyException('Accèss forbidden', 403);
         }
         if (isset($_GET['id']) != null || isset($_GET['id']) != "" || isset($_GET['id']) != " " || !empty($_GET['id'])) {
-            return user::deleteUser($_GET['id']);
+            return User::deleteUser($_GET['id']);
         }
         throw new MyException("Parameter not found, try another one", 404);
     }
