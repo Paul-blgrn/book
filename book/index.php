@@ -28,6 +28,12 @@ $routes = [
     // COMMENT ROUTE
     new Route($localpath .'/comments', 'CommentController', 'showAllComments'),
     new Route($localpath .'/comment', 'CommentController', 'showAllUserComments'),
+
+    // USER ROUTE
+    new Route($localpath .'/user', 'UserController', 'showUser'),
+    new Route($localpath .'/user/create', 'UserController', 'createUser'),
+    new Route($localpath .'/user/update', 'UserController', 'updateUser'),
+    new Route($localpath .'/user/delete', 'UserController', 'deleteUser'),
 ];
 
 $url = parse_url($_SERVER['REQUEST_URI'])['path'];
