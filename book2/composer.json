@@ -1,0 +1,16 @@
+{
+    "name": "holdhaven/book2",
+    "autoload": {
+        "psr-4": {
+            "Holdhaven\\Book2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "holdhaven"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^1.15"
+    }
+}

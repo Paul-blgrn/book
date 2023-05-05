@@ -1,0 +1,15 @@
+{
+    "name": "poilon/book",
+    "autoload": {
+        "psr-4": {
+            "Poilon\\Book\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paul-blgrn",
+            "email": "paul.blgrn@gmail.com"
+        }
+    ],
+    "require": {}
+}
